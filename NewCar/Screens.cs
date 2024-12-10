@@ -1,0 +1,6 @@
+﻿
+enum Screens
+{
+    gameplay
+}
+
