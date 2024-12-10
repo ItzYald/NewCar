@@ -17,14 +17,15 @@ namespace NewCar
             drawables = new List<Drawable>();
             nextables = new List<Nextable>();
 
-            field = new Field();
+            car = new Car("Images/Cars/Car1.png");
+
+            field = new Field(car.getDistance);
+
+
             drawables.Add(field);
             nextables.Add(field);
-
-            car = new Car("Images/Cars/Car1.png");
             drawables.Add(car);
             nextables.Add(car);
-
         }
 
         public void Next()

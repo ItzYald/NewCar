@@ -8,37 +8,48 @@ namespace NewCar
 {
     internal class Car : Drawable, Nextable
     {
-        Image image;
         Sprite sprite;
         Vector2f size;
 
+        int distance;
+        float speed;
+
         public Car(string fileName)
         {
-            image = new Image(fileName);
-            sprite = new Sprite(new Texture(image));
+            sprite = new Sprite(new Texture(fileName));
 
-            size = new Vector2f(100, 200);
+            size = new Vector2f(200, 100);
 
             sprite.Scale = new Vector2f(size.X / sprite.TextureRect.Size.X, size.Y / sprite.TextureRect.Size.Y);
-            sprite.Position = new Vector2f((Constants.windowWidth - size.X) / 2, 500);
-            
+            sprite.Position = new Vector2f(120, 220);
+
+            distance = 0;
+            speed = 0;
+
         }
 
-        public void Move()
+        public int getDistance()
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D) && sprite.Position.X + size.X < (Constants.windowWidth + Constants.fieldSize) / 2)
+            return distance;
+        }
+
+        void Accel()
+        {
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W))
             {
-                sprite.Position += new Vector2f(4, 0);
+                speed += 0.2f;
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A) && sprite.Position.X > (Constants.windowWidth - Constants.fieldSize) / 2)
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && speed > 0)
             {
-                sprite.Position += new Vector2f(-4, 0);
+                
+                speed -= 0.2f;
             }
         }
 
         public void Next()
         {
-            Move();
+            Accel();
+            distance += (int)speed;
         }
 
         public void Draw(RenderTarget target, RenderStates states)
