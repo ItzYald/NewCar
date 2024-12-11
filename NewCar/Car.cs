@@ -4,6 +4,7 @@ using SFML.System;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
+
 namespace NewCar
 {
     internal class Car : Drawable, Nextable
@@ -11,8 +12,14 @@ namespace NewCar
         Sprite sprite;
         Vector2f size;
 
+
         int distance;
         float speed;
+        int rpm;
+
+        float[] numberOfTransmissions;
+
+        int transmissionNumber;
 
         public Car(string fileName)
         {
@@ -25,25 +32,29 @@ namespace NewCar
 
             distance = 0;
             speed = 0;
+            rpm = 1000;
 
+            numberOfTransmissions = new float[] { 1f, 1.2f, 1.4f, 1.7f };
+            transmissionNumber = 0;
         }
 
-        public int getDistance()
-        {
-            return distance;
-        }
+        public int getDistance() => distance;
+        public int getPixelDistance() => (int)(distance / 60f * 23f);
+        public int getSpeed() => (int)speed;
+        public int getRpm() => rpm;
 
         void Accel()
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.W))
             {
-                speed += 0.2f;
+                rpm += 30;
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.S) && speed > 0)
             {
-                
-                speed -= 0.2f;
+
+                rpm -= 30;
             }
+            speed = rpm / 100f * numberOfTransmissions[transmissionNumber];
         }
 
         public void Next()
