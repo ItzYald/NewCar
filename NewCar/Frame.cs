@@ -22,7 +22,7 @@ namespace NewCar
 
             field = new Field(car.getPixelDistance);
 
-            speedometer = new Speedometer(car.getSpeed, car.getRpm);
+            speedometer = new Speedometer(car.getSpeed, car.getRpm, car.getTransmissionNumber);
 
             drawables.Add(field);
             nextables.Add(field);

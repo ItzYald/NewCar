@@ -1,4 +1,5 @@
-﻿using SFML.System;
+﻿using SFML.Graphics;
+using SFML.System;
 
 namespace NewCar
 {
@@ -7,6 +8,7 @@ namespace NewCar
         public const int windowWidth = 1280;
         public const int windowHeight = 720;
         public const int fieldSize = 400;
-
+        public const float airResistance = 1f;
+        public static Font font = new Font("Fonts/arial.ttf");
     }
 }
