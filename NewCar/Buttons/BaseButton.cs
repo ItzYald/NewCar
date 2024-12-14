@@ -18,20 +18,22 @@ namespace NewCar.Buttons
         public Action? onClick = null;
         public Action? onAim = null;
 
-        private Vector2f mousePosition;
-
         private bool isClicked;
 
-        protected BaseButton(Vector2f position, Vector2f size)
+        protected BaseButton(Vector2f position, Vector2f size, string message="")
         {
             this.position = position;
             this.size = size;
-            text = new Text("", Constants.font, 25);
+            uint characterSize = 25;
+            text = new Text(message, Constants.font, characterSize);
+            text.FillColor = Color.Black;
+            text.Position = new Vector2f(position.X + size.X / 2, position.Y + size.Y / 2 - text.GetLocalBounds().Height / 2);
+            text.Origin = new Vector2f(text.GetLocalBounds().Width / 2, text.GetLocalBounds().Height / 2);
         }
 
         private bool CheckAim()
         {
-            mousePosition = (Vector2f)GameCycle.GetMousePosition();
+            Vector2f mousePosition = (Vector2f)GameCycle.GetMousePosition();
 
             if (mousePosition.X > position.X && mousePosition.X < position.X + size.X &&
                 mousePosition.Y > position.Y && mousePosition.Y < position.Y + size.Y)

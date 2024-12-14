@@ -11,19 +11,11 @@ namespace NewCar
 {
     internal class Frame : Drawable, Nextable
     {
-        List<Drawable> drawables;
-        List<Nextable> nextables;
         Screen screen;
 
         public Frame()
         {
-            drawables = new List<Drawable>();
-            nextables = new List<Nextable>();
-
-            screen = new GameplayScreen(SetScreen);
-            drawables.Add(screen);
-            nextables.Add(screen);
-
+            screen = new Menu(SetScreen);
         }
 
         private void SetScreen(ScreensEnum newScreen)
@@ -31,24 +23,22 @@ namespace NewCar
             switch (newScreen)
             {
                 case ScreensEnum.gameplay:
-                    screen = new GameplayScreen(SetScreen); break;
+                    screen = new GameplayScreen(SetScreen);
+                    break;
+                case ScreensEnum.menu:
+                    screen = new Menu(SetScreen);
+                    break;
             }
         }
 
         public void Next()
         {
-            foreach (Nextable nextable in nextables)
-            {
-                nextable.Next();
-            }
+            screen.Next();
         }
 
         public void Draw(RenderTarget target, RenderStates states)
         {
-            foreach (Drawable drawable in drawables)
-            {
-                target.Draw(drawable, states);
-            }
+            target.Draw(screen, states);
         }
 
     }

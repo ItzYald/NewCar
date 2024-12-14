@@ -14,15 +14,8 @@ namespace NewCar.Buttons
         RectangleShape shape;
         Color fillColor;
 
-        //button = new RectangleButton(new Vector2f(10, 10), new Vector2f(100, 50), new Color(230, 230, 30))
-        //{
-        //    onClick = () => { engine.rpm = 100; }
-        //};
-        //drawables.Add(button);
-        //nextables.Add(button);
-
-        public RectangleButton(Vector2f position, Vector2f size, Color color) :
-            base(position, size) 
+        public RectangleButton(Vector2f position, Vector2f size, Color color, string message="") :
+            base(position, size, message) 
         {
             shape = new RectangleShape(size);
             shape.Position = position;
@@ -33,10 +26,7 @@ namespace NewCar.Buttons
         public override void Draw(RenderTarget target, RenderStates states)
         {
             target.Draw(shape, states);
-            if (text != null)
-            {
-                target.Draw(text, states);
-            }
+            target.Draw(text, states);
         }
 
     }
