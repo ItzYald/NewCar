@@ -11,7 +11,6 @@ namespace NewCar
 
         Car car;
         Field field;
-        Speedometer speedometer;
 
         public Frame()
         {
@@ -22,14 +21,10 @@ namespace NewCar
 
             field = new Field(car.getPixelDistance);
 
-            speedometer = new Speedometer(car.getSpeed, car.getRpm, car.getTransmissionNumber);
-
             drawables.Add(field);
             nextables.Add(field);
             drawables.Add(car);
             nextables.Add(car);
-            drawables.Add(speedometer);
-            nextables.Add(speedometer);
         }
 
         public void Next()

@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,13 @@ namespace NewCar
 {
     internal class GameCycle
     {
-        VideoMode videoMode;
-        RenderWindow window;
+        static VideoMode videoMode = new VideoMode(Constants.windowWidth, Constants.windowHeight);
+        static RenderWindow window = new RenderWindow(videoMode, "Window");
 
         Frame frame;
 
         public GameCycle()
         {
-            videoMode = new VideoMode(Constants.windowWidth, Constants.windowHeight);
-            window = new RenderWindow(videoMode, "Window");
-
             window.Closed += Onclose;
 
             window.SetFramerateLimit(60);
@@ -37,8 +35,12 @@ namespace NewCar
                 window.Display();
             }
         }
-
-        public void Onclose(object sender, EventArgs e)
+         
+        public static Vector2i GetMousePosition()
+        {
+            return Mouse.GetPosition(window);
+        }
+        private void Onclose(object? sender, EventArgs e)
         {
             window.Close();
         }
