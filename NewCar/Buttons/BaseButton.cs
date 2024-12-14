@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +13,20 @@ namespace NewCar.Buttons
     {
         protected Vector2f position;
         protected Vector2f size;
-        protected Text? text;
+        public Text? text;
 
-        private Action? onClick;
-        private Action? onAim;
+        public Action? onClick = null;
+        public Action? onAim = null;
 
         private Vector2f mousePosition;
 
         private bool isClicked;
 
-        protected BaseButton(Action? onClick = null, Text? text = null, Action? onAim = null)
+        protected BaseButton(Vector2f position, Vector2f size)
         {
-            this.onClick = onClick;
-            this.onAim = onAim;
-            this.text = text;
+            this.position = position;
+            this.size = size;
+            text = new Text("", Constants.font, 25);
         }
 
         private bool CheckAim()
@@ -43,11 +44,10 @@ namespace NewCar.Buttons
         private void CheckClick()
         {
             if (onClick == null) return;
+            if (!CheckAim()) return;
 
-            if (CheckAim())
-            {
+            if (Mouse.IsButtonPressed(Mouse.Button.Left))
                 isClicked = true;
-            }
             else
             {
                 if (isClicked)
@@ -66,10 +66,7 @@ namespace NewCar.Buttons
                 onAim();
 
         }
-        
-        public virtual void Draw(RenderTarget target, RenderStates states)
-        {
-            target.Draw(text, states);
-        }
+
+        public abstract void Draw(RenderTarget target, RenderStates states);
     }
 }

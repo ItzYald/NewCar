@@ -1,6 +1,11 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
+using NewCar.Buttons;
+using static SFML.Window.Mouse;
+using NewCar.Screens.Gameplay;
+using NewCar.Models;
+using NewCar.Screens;
 
 namespace NewCar
 {
@@ -8,23 +13,26 @@ namespace NewCar
     {
         List<Drawable> drawables;
         List<Nextable> nextables;
-
-        Car car;
-        Field field;
+        Screen screen;
 
         public Frame()
         {
             drawables = new List<Drawable>();
             nextables = new List<Nextable>();
 
-            car = new Car("Images/Cars/Car1.png");
+            screen = new GameplayScreen(SetScreen);
+            drawables.Add(screen);
+            nextables.Add(screen);
 
-            field = new Field(car.getPixelDistance);
+        }
 
-            drawables.Add(field);
-            nextables.Add(field);
-            drawables.Add(car);
-            nextables.Add(car);
+        private void SetScreen(ScreensEnum newScreen)
+        {
+            switch (newScreen)
+            {
+                case ScreensEnum.gameplay:
+                    screen = new GameplayScreen(SetScreen); break;
+            }
         }
 
         public void Next()

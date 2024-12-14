@@ -6,8 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewCar
+namespace NewCar.Screens.Gameplay
 {
+    /// <summary>
+    /// Speed and rpm display
+    /// </summary>
     internal class Speedometer : Drawable, Nextable
     {
         GetDelegate getSpeed;

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewCar
+namespace NewCar.Screens.Gameplay
 {
     internal class Markup : Drawable, Nextable
     {
@@ -22,7 +22,7 @@ namespace NewCar
             sprite.Scale = new Vector2f(2, 2);
 
             positions = new List<int>();
-            
+
             for (int i = 0; i < 10; i++)
             {
                 positions.Add(i * 128);
@@ -36,7 +36,7 @@ namespace NewCar
         {
             for (int i = 0; i < positions.Count; i++)
             {
-                positions[i] = 1280 - ((getCarDistance() + i * 128) % 1280) - 10;
+                positions[i] = 1280 - (getCarDistance() + i * 128) % 1280 - 10;
             }
         }
 
