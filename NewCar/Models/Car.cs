@@ -34,7 +34,7 @@ namespace NewCar.Models
             distance = 0;
             speed = 0;
 
-            engine = new Engine(power, maxRpm);
+            engine = new Engine(power, maxRpm, getTransmission);
 
             numbersOfTransmission = [3.8f, 2.2f, 1.3f, 0.9f, 0.5f];
             transmissionNumber = 0;
@@ -44,10 +44,10 @@ namespace NewCar.Models
         }
 
         public int getDistance() => distance;
-        public int getPixelDistance() => (int)(distance / 60f * 23f);
         public int getSpeed() => (int)speed;
         public int getRpm() => engine.rpm;
         public int getTransmissionNumber() => transmissionNumber + 1;
+        public float getTransmission() => numbersOfTransmission[transmissionNumber];
 
         void TransmissionUp()
         {
@@ -64,12 +64,6 @@ namespace NewCar.Models
             {
                 transmissionNumber -= 1;
             }
-        }
-
-        void StartEngine()
-        {
-            engine.isStart = true;
-            engine.rpm = (int)(300 * numbersOfTransmission[transmissionNumber]);
         }
 
         void Accel()
@@ -90,7 +84,7 @@ namespace NewCar.Models
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.I) && !engine.isStart)
             {
-                StartEngine();
+                engine.Start();
             }
             if (engine.rpm < 500)
             {
