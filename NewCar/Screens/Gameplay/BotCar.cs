@@ -9,41 +9,19 @@ using System.Threading.Tasks;
 
 namespace NewCar.Screens.Gameplay
 {
-    internal class BotCar : Drawable, Nextable
+    internal class BotCar : BaseDrawCar
     {
-        Car car;
-        Sprite sprite;
-        Vector2f size;
-
-        List<Nextable> nextables;
-        List<Drawable> drawables;
-
         Func<int> getMainCarPixelDistance;
 
-        public BotCar(string fileName, int power, int maxRpm, Func<int> getMainCarPixelDistance)
+        public BotCar(string fileName, int power, int maxRpm, Func<int> getMainCarPixelDistance) :
+            base(fileName, power, maxRpm)
         {
             this.getMainCarPixelDistance = getMainCarPixelDistance;
 
-            nextables = new List<Nextable>();
-            drawables = new List<Drawable>();
-
-            size = new Vector2f(300, 150);
-
-            car = new Car(power, maxRpm);
-            nextables.Add(car);
-
-            sprite = new Sprite(new Texture(fileName));
-            sprite.Scale = new Vector2f(size.X / sprite.TextureRect.Size.X, size.Y / sprite.TextureRect.Size.Y);
             sprite.Position = new Vector2f(120, 270);
-            drawables.Add(sprite);
         }
 
-        public int getPixelDistance() => (int)(car.getDistance() / 60f * 23f);
-
-        public void Start() { car.Start(); }
-        public void Stop() { car.Stop(); }
-
-        public void Next()
+        public override void Next()
         {
             if (!car.IsStarted) return;
             car.Accel();
@@ -58,7 +36,7 @@ namespace NewCar.Screens.Gameplay
             }
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public override void Draw(RenderTarget target, RenderStates states)
         {
             sprite.Position = new Vector2f(getPixelDistance() - getMainCarPixelDistance() + 120, sprite.Position.Y);
             target.Draw(sprite, states);
