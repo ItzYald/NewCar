@@ -8,7 +8,7 @@ using NewCar.Models;
 
 namespace NewCar.Screens.Gameplay
 {
-    internal class DrawCar : Drawable, Nextable
+    internal class PlayerCar : Drawable, Nextable
     {
         Car car;
         Sprite sprite;
@@ -19,7 +19,7 @@ namespace NewCar.Screens.Gameplay
 
         Speedometer speedometer;
 
-        public DrawCar(string fileName, int power, int maxRpm)
+        public PlayerCar(string fileName, int power, int maxRpm)
         {
             nextables = new List<Nextable>();
             drawables = new List<Drawable>();
@@ -36,7 +36,13 @@ namespace NewCar.Screens.Gameplay
             speedometer = new Speedometer(car.getSpeed, car.getRpm, car.getTransmissionNumber);
             drawables.Add(speedometer);
             nextables.Add(speedometer);
+
+            nextables.Add(new CheckKey(Keyboard.Key.K, car.TransmissionDown));
+            nextables.Add(new CheckKey(Keyboard.Key.L, car.TransmissionUp));
         }
+
+        public void Start() { car.Start(); }
+        public void Stop() { car.Stop(); }
 
         public int getPixelDistance() => (int)(car.getDistance() / 60f * 23f);
 
@@ -45,6 +51,15 @@ namespace NewCar.Screens.Gameplay
             foreach (Nextable nextable in nextables)
             {
                 nextable.Next();
+            }
+            if (!car.IsStarted) return;
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+            {
+                car.Accel();
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+            {
+                car.Break();
             }
         }
 

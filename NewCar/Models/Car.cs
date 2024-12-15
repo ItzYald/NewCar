@@ -25,6 +25,12 @@ namespace NewCar.Models
 
         int transmissionNumber;
 
+        bool isStarted;
+
+        public bool IsStarted { get { return isStarted; } }
+
+        public int MaxRpm { get { return engine.MaxRpm; } }
+
         const float powerK = 400000000f;
 
         public Car(int power, int maxRpm)
@@ -39,8 +45,7 @@ namespace NewCar.Models
             numbersOfTransmission = [3.8f, 2.2f, 1.3f, 0.9f, 0.5f];
             transmissionNumber = 0;
 
-            nextables.Add(new CheckKey(Keyboard.Key.K, TransmissionDown));
-            nextables.Add(new CheckKey(Keyboard.Key.L, TransmissionUp));
+            isStarted = false;
         }
 
         public int getDistance() => distance;
@@ -49,7 +54,25 @@ namespace NewCar.Models
         public int getTransmissionNumber() => transmissionNumber + 1;
         public float getTransmission() => numbersOfTransmission[transmissionNumber];
 
-        void TransmissionUp()
+        public void Start()
+        {
+            speed = 0;
+            transmissionNumber = 0;
+            distance = 0;
+            isStarted = true;
+            engine.Start();
+        }
+
+        public void Stop()
+        {
+            distance = 0;
+            speed = 0;
+            transmissionNumber = 0;
+            isStarted = false;
+            engine.Stop();
+        }
+
+        public void TransmissionUp()
         {
             if (transmissionNumber + 1 < numbersOfTransmission.Count())
             {
@@ -58,7 +81,7 @@ namespace NewCar.Models
             }
         }
 
-        void TransmissionDown()
+        public void TransmissionDown()
         {
             if (transmissionNumber > 0)
             {
@@ -66,18 +89,17 @@ namespace NewCar.Models
             }
         }
 
-        void Accel()
+        public void Break()
         {
-            if (engine.rpm > engine.maxRpm * 1.05f)
+            if (speed > 0)
             {
-                engine.rpm -= (int)(300 * numbersOfTransmission[transmissionNumber] * Math.Pow(engine.rpm - engine.maxRpm, 0.89) / (engine.maxRpm * 1.05f - engine.maxRpm));
+                engine.rpm -= (int)(60 * numbersOfTransmission[transmissionNumber]);
             }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W))
-            {
-                engine.rpm += (int)((-1 * engine.rpm * engine.rpm + 2 * engine.maxRpm * engine.rpm) / powerK * engine.power * numbersOfTransmission[transmissionNumber]);
-            }
-
-            engine.rpm += (int)(0.5f * numbersOfTransmission[transmissionNumber]);
+        }
+        public void Accel()
+        {
+            engine.rpm += 
+                (int)((-1 * engine.rpm * engine.rpm + 2 * engine.maxRpm * engine.rpm) / powerK * engine.power * numbersOfTransmission[transmissionNumber]);
         }
 
         public void Move()
@@ -92,12 +114,14 @@ namespace NewCar.Models
                 engine.rpm -= 10;
             }
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S) && speed > 0)
-            {
-                engine.rpm -= (int)(60 * numbersOfTransmission[transmissionNumber]);
-            }
             if (engine.isStart)
-                Accel();
+            {
+                if (engine.rpm > engine.maxRpm * 1.05f)
+                {
+                    engine.rpm -= (int)(300 * numbersOfTransmission[transmissionNumber] * Math.Pow(engine.rpm - engine.maxRpm, 0.89) / (engine.maxRpm * 1.05f - engine.maxRpm));
+                }
+                engine.rpm += (int)(0.5f * numbersOfTransmission[transmissionNumber]);
+            }
 
             engine.rpm -= (int)(speed * Constants.airResistance * numbersOfTransmission[transmissionNumber]);
 
@@ -114,6 +138,7 @@ namespace NewCar.Models
 
         public void Next()
         {
+            if (!isStarted) return;
             Move();
             foreach (Nextable nextable in nextables)
             {

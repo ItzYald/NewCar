@@ -15,11 +15,13 @@ namespace NewCar.Models
 
         Func<float> getTransmission;
 
+        public int MaxRpm { get { return maxRpm; } }
+
         public Engine(int power, int maxRpm, Func<float> getTransmission)
         {
             this.maxRpm = maxRpm;
             this.power = power;
-            rpm = 1000;
+            rpm = 0;
             isStart = true;
             this.getTransmission = getTransmission;
         }
@@ -28,6 +30,12 @@ namespace NewCar.Models
         {
             isStart = true;
             rpm = (int)(300 * getTransmission());
+        }
+
+        public void Stop()
+        {
+            rpm = 0;
+            isStart = false;
         }
 
     }
