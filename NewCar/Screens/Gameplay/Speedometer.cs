@@ -13,9 +13,9 @@ namespace NewCar.Screens.Gameplay
     /// </summary>
     internal class Speedometer : Drawable, Nextable
     {
-        GetDelegate getSpeed;
-        GetDelegate getRpm;
-        GetDelegate getTransmissionNumber;
+        Func<int> getSpeed;
+        Func<int> getRpm;
+        Func<int> getTransmissionNumber;
 
         Text speedText;
         Text rpmText;
@@ -26,29 +26,29 @@ namespace NewCar.Screens.Gameplay
 
         List<Drawable> drawables;
 
-        public delegate int GetDelegate();
-
-        public Speedometer(GetDelegate getSpeed, GetDelegate getRpm, GetDelegate getTransmissionNumber)
+        public Speedometer(Func<int> getSpeed, Func<int> getRpm, Func<int> getTransmissionNumber)
         {
             drawables = new List<Drawable>();
 
+            Vector2f position = new Vector2f(0, 570);
+
             speedText = new Text(getSpeed().ToString(), Constants.font, 25);
-            speedText.Position = new Vector2f(100, 500);
+            speedText.Position = new Vector2f(100, position.Y + 50);
             speedText.FillColor = new Color(250, 250, 10);
             rpmText = new Text(getRpm().ToString(), Constants.font, 25);
-            rpmText.Position = new Vector2f(500, 500);
+            rpmText.Position = new Vector2f(500, position.Y + 50);
             rpmText.FillColor = new Color(250, 250, 10);
             transmissionText = new Text(getTransmissionNumber().ToString(), Constants.font, 25);
-            transmissionText.Position = new Vector2f(600, 500);
+            transmissionText.Position = new Vector2f(600, position.Y + 50);
             transmissionText.FillColor = new Color(250, 250, 10);
 
             speedRect = new RectangleShape(new Vector2f(10, 100));
             speedRect.FillColor = new Color(250, 250, 10);
-            speedRect.Position = new Vector2f(120, 450);
+            speedRect.Position = new Vector2f(120, position.Y);
 
             rpmRect = new RectangleShape(new Vector2f(10, 100));
             rpmRect.FillColor = new Color(250, 250, 10);
-            rpmRect.Position = new Vector2f(520, 450);
+            rpmRect.Position = new Vector2f(520, position.Y);
 
 
             drawables.Add(speedText);

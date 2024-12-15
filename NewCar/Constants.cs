@@ -9,6 +9,9 @@ namespace NewCar
         public const int windowHeight = 720;
         public const int fieldSize = 400;
         public const float airResistance = 0.07f;
+
+        public const string car1FileName = "Images/Cars/Car1.png";
+
         public static Font font = new Font("Fonts/arial.ttf");
     }
 }

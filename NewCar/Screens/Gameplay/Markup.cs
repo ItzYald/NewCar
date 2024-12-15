@@ -13,13 +13,13 @@ namespace NewCar.Screens.Gameplay
         Sprite sprite;
         List<int> positions;
 
-        Field.GetDelegate getCarDistance;
+        Func<int> getCarDistance;
 
-        public Markup(Field.GetDelegate getCarDistance)
+        public Markup(Func<int> getCarDistance)
         {
             sprite = new Sprite(new Texture("Images/Field/Markup.png"));
-            sprite.Position = new Vector2f(0, 265);
-            sprite.Scale = new Vector2f(2, 2);
+            sprite.Position = new Vector2f(0, 310);
+            sprite.Scale = new Vector2f(4, 3);
 
             positions = new List<int>();
 

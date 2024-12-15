@@ -10,12 +10,14 @@ namespace NewCar.Screens.Gameplay
 {
     internal class GameplayScreen : Screen
     {
-        Car car;
+        DrawCar car;
+        BotCar botCar;
         Field field;
 
         public GameplayScreen(Action<ScreensEnum> setNextScreen) : base(setNextScreen)
         {
-            car = new Car("Images/Cars/Car1.png", 300, 7000);
+            car = new DrawCar(Constants.car1FileName, 300, 7000);
+            botCar = new BotCar(Constants.car1FileName, 300, 7000, car.getPixelDistance);
 
             field = new Field(car.getPixelDistance);
 
@@ -23,6 +25,8 @@ namespace NewCar.Screens.Gameplay
             nextables.Add(field);
             drawables.Add(car);
             nextables.Add(car);
+            drawables.Add(botCar);
+            nextables.Add(botCar);
         }
 
     }

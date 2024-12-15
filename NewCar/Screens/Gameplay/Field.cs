@@ -16,11 +16,9 @@ namespace NewCar.Screens.Gameplay
 
         List<Drawable> drawables;
 
-        GetDelegate getCarDistance;
+        Func<int> getCarDistance;
 
-        public delegate int GetDelegate();
-
-        public Field(GetDelegate getCarDistance)
+        public Field(Func<int> getCarDistance)
         {
             drawables = new List<Drawable>();
 
@@ -31,8 +29,8 @@ namespace NewCar.Screens.Gameplay
             drawables.Add(backGround);
 
             asphalt = new RectangleShape();
-            asphalt.Size = new Vector2f(1280, 100);
-            asphalt.Position = new Vector2f(0, 220);
+            asphalt.Size = new Vector2f(1280, 270);
+            asphalt.Position = new Vector2f(0, 180);
             asphalt.FillColor = new Color(100, 100, 100);
             drawables.Add(asphalt);
 
