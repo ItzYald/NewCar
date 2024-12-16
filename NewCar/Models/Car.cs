@@ -40,7 +40,7 @@ namespace NewCar.Models
             distance = 0;
             speed = 0;
 
-            engine = new Engine(power, maxRpm, getTransmission);
+            engine = new Engine(new EngineSpecifications(power, maxRpm), getTransmission);
 
             numbersOfTransmission = [3.8f, 2.2f, 1.3f, 0.9f, 0.5f];
             transmissionNumber = 0;
@@ -59,8 +59,8 @@ namespace NewCar.Models
             speed = 0;
             transmissionNumber = 0;
             distance = 0;
-            isStarted = true;
             engine.Start();
+            isStarted = true;
         }
 
         public void Stop()
@@ -98,8 +98,8 @@ namespace NewCar.Models
         }
         public void Accel()
         {
-            engine.rpm += 
-                (int)((-1 * engine.rpm * engine.rpm + 2 * engine.maxRpm * engine.rpm) / powerK * engine.power * numbersOfTransmission[transmissionNumber]);
+            engine.rpm +=
+                (int)((-1 * engine.rpm * engine.rpm + 2 * engine.MaxRpm * engine.rpm) / powerK * engine.Power * numbersOfTransmission[transmissionNumber]);
         }
 
         public void Move()
@@ -116,15 +116,14 @@ namespace NewCar.Models
 
             if (engine.isStart)
             {
-                if (engine.rpm > engine.maxRpm * 1.05f)
+                if (engine.rpm > engine.MaxRpm * 1.05f)
                 {
-                    engine.rpm -= (int)(300 * numbersOfTransmission[transmissionNumber] * Math.Pow(engine.rpm - engine.maxRpm, 0.89) / (engine.maxRpm * 1.05f - engine.maxRpm));
+                    engine.rpm -= (int)(300 * numbersOfTransmission[transmissionNumber] * Math.Pow(engine.rpm - engine.MaxRpm, 0.89) / (engine.MaxRpm * 1.05f - engine.MaxRpm));
                 }
                 engine.rpm += (int)(0.5f * numbersOfTransmission[transmissionNumber]);
             }
 
             engine.rpm -= (int)(speed * Constants.airResistance * numbersOfTransmission[transmissionNumber]);
-
 
             if (engine.rpm < 0)
             {

@@ -9,27 +9,26 @@ namespace NewCar.Models
     internal class Engine
     {
         public int rpm;
-        public int maxRpm;
+        EngineSpecifications specifications;
         public bool isStart;
-        public int power;
 
         Func<float> getTransmission;
 
-        public int MaxRpm { get { return maxRpm; } }
+        public int MaxRpm { get { return specifications.maxRpm; } }
+        public int Power { get { return specifications.power; } }
 
-        public Engine(int power, int maxRpm, Func<float> getTransmission)
+        public Engine(EngineSpecifications specifications, Func<float> getTransmission)
         {
-            this.maxRpm = maxRpm;
-            this.power = power;
+            this.specifications = specifications;
             rpm = 0;
-            isStart = true;
+            isStart = false;
             this.getTransmission = getTransmission;
         }
 
         public void Start()
         {
-            isStart = true;
             rpm = (int)(300 * getTransmission());
+            isStart = true;
         }
 
         public void Stop()

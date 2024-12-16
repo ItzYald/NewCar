@@ -12,15 +12,14 @@ namespace NewCar.Buttons
     internal class RectangleButton : BaseButton
     {
         RectangleShape shape;
-        Color fillColor;
 
-        public RectangleButton(Vector2f position, Vector2f size, Color color, string message="") :
+        public RectangleButton(Vector2f position, Vector2f size, Color fillColor, string message="") :
             base(position, size, message) 
         {
             shape = new RectangleShape(size);
             shape.Position = position;
             shape.Size = size;
-            shape.FillColor = color;
+            shape.FillColor = fillColor;
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
