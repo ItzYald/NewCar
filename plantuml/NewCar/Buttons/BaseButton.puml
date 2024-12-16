@@ -1,0 +1,11 @@
+@startuml
+abstract class BaseButton {
+    + text : Text?
+    + onClick : Action? = null
+    + onAim : Action? = null
+    + Next() : void
+    + {abstract} Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- BaseButton
+Nextable <|-- BaseButton
+@enduml

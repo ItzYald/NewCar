@@ -1,0 +1,6 @@
+@startuml
+class GameplayScreen {
+    + GameplayScreen(setNextScreen:Action<ScreensEnum>)
+}
+Screen <|-- GameplayScreen
+@enduml

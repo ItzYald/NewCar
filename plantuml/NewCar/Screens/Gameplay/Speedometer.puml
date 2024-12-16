@@ -1,0 +1,9 @@
+@startuml
+class Speedometer {
+    + Speedometer(getSpeed:Func<int>, getRpm:Func<int>, getTransmissionNumber:Func<int>)
+    + Next() : void
+    + Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- Speedometer
+Nextable <|-- Speedometer
+@enduml

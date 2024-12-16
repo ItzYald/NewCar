@@ -1,0 +1,5 @@
+@startuml
+interface Nextable {
+    + Next() : void
+}
+@enduml

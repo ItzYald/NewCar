@@ -1,0 +1,11 @@
+@startuml
+abstract class BaseDrawCar {
+    + getPixelDistance() : int
+    + Start() : void
+    + Stop() : void
+    + {abstract} Next() : void
+    + {abstract} Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- BaseDrawCar
+Nextable <|-- BaseDrawCar
+@enduml

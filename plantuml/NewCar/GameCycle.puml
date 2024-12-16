@@ -1,0 +1,6 @@
+@startuml
+class GameCycle {
+    + GameCycle()
+    + {static} GetMousePosition() : Vector2i
+}
+@enduml

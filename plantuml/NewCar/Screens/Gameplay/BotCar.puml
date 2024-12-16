@@ -1,0 +1,8 @@
+@startuml
+class BotCar {
+    + BotCar(fileName:string, power:int, maxRpm:int, getMainCarPixelDistance:Func<int>)
+    + <<override>> Next() : void
+    + <<override>> Draw(target:RenderTarget, states:RenderStates) : void
+}
+BaseDrawCar <|-- BotCar
+@enduml

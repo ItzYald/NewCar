@@ -1,0 +1,7 @@
+@startuml
+class RectangleButton {
+    + RectangleButton(position:Vector2f, size:Vector2f, color:Color, message:string)
+    + <<override>> Draw(target:RenderTarget, states:RenderStates) : void
+}
+BaseButton <|-- RectangleButton
+@enduml

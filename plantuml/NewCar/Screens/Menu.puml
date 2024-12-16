@@ -1,0 +1,6 @@
+@startuml
+class Menu {
+    + Menu(setNextScreen:Action<ScreensEnum>)
+}
+Screen <|-- Menu
+@enduml

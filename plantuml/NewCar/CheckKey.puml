@@ -1,0 +1,7 @@
+@startuml
+class CheckKey {
+    + CheckKey(key:Keyboard.Key, action:Action)
+    + Next() : void
+}
+Nextable <|-- CheckKey
+@enduml

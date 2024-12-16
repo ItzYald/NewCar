@@ -1,0 +1,13 @@
+@startuml
+enum ScreensEnum {
+    gameplay,
+    menu,
+}
+abstract class Screen {
+    + Screen(setNextScreen:Action<ScreensEnum>)
+    + <<virtual>> Next() : void
+    + <<virtual>> Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- Screen
+Nextable <|-- Screen
+@enduml

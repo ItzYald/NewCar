@@ -1,0 +1,8 @@
+@startuml
+class PlayerCar {
+    + PlayerCar(fileName:string, power:int, maxRpm:int)
+    + <<override>> Next() : void
+    + <<override>> Draw(target:RenderTarget, states:RenderStates) : void
+}
+BaseDrawCar <|-- PlayerCar
+@enduml

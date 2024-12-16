@@ -1,0 +1,24 @@
+@startuml
+!include .\\NewCar\Nextable.puml
+!include .\\NewCar\Frame.puml
+!include .\\NewCar\Constants.puml
+!include .\\NewCar\CheckKey.puml
+!include .\\NewCar\GameCycle.puml
+!include .\\NewCar\Program.puml
+!include .\\NewCar\Models\Car.puml
+!include .\\NewCar\Models\Engine.puml
+!include .\\NewCar\Buttons\RectangleButton.puml
+!include .\\NewCar\Buttons\BaseButton.puml
+!include .\\NewCar\Screens\Screen.puml
+!include .\\NewCar\Screens\Menu.puml
+!include .\\NewCar\Screens\Gameplay\Speedometer.puml
+!include .\\NewCar\Screens\Gameplay\Markup.puml
+!include .\\NewCar\Screens\Gameplay\Field.puml
+!include .\\NewCar\Screens\Gameplay\GameplayScreen.puml
+!include .\\NewCar\Screens\Gameplay\PlayerCar.puml
+!include .\\NewCar\Screens\Gameplay\BaseDrawCar.puml
+!include .\\NewCar\Screens\Gameplay\BotCar.puml
+!include .\\NewCar\obj\Debug\net8.0\NewCar.GlobalUsings.g.puml
+!include .\\NewCar\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.puml
+!include .\\NewCar\obj\Debug\net8.0\NewCar.AssemblyInfo.puml
+@enduml

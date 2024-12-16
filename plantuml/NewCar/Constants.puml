@@ -1,0 +1,10 @@
+@startuml
+class Constants {
+    + <<const>> windowWidth : int = 1280
+    + <<const>> windowHeight : int = 720
+    + <<const>> fieldSize : int = 400
+    + <<const>> airResistance : float = 0.07f
+    + <<const>> car1FileName : string = "Images/Cars/Car1.png"
+}
+Constants o-> "font" Font
+@enduml

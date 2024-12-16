@@ -1,0 +1,9 @@
+@startuml
+class Markup {
+    + Markup(getCarDistance:Func<int>)
+    + Next() : void
+    + Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- Markup
+Nextable <|-- Markup
+@enduml

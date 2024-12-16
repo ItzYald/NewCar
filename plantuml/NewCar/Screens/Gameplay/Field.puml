@@ -1,0 +1,9 @@
+@startuml
+class Field {
+    + Field(getCarDistance:Func<int>)
+    + Next() : void
+    + Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- Field
+Nextable <|-- Field
+@enduml

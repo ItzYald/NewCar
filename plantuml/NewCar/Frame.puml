@@ -1,0 +1,9 @@
+@startuml
+class Frame {
+    + Frame()
+    + Next() : void
+    + Draw(target:RenderTarget, states:RenderStates) : void
+}
+Drawable <|-- Frame
+Nextable <|-- Frame
+@enduml
