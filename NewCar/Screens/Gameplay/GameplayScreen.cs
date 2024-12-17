@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using NewCar.Models;
+using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,15 @@ namespace NewCar.Screens.Gameplay
     {
         PlayerCar car;
         BotCar botCar;
+        BotCar botCar2;
         Field field;
 
-        public GameplayScreen(Action<ScreensEnum> setNextScreen) : base(setNextScreen)
+        public GameplayScreen(Action<ScreensEnum> setNextScreen) : 
+            base(setNextScreen)
         {
-            car = new PlayerCar(Constants.car1FileName, 300, 9000);
-            botCar = new BotCar(Constants.car1FileName, 300, 9000, car.getPixelDistance);
+            car = new PlayerCar(Constants.car1FileName, new CarSpecifications(new EngineSpecifications(300, 7000), 60));
+            botCar = new BotCar(Constants.car1FileName, new CarSpecifications(new EngineSpecifications(200, 9000), 60), car.getPixelDistance);
+            botCar2 = new BotCar(Constants.car1FileName, new CarSpecifications(new EngineSpecifications(300, 9000), 60), car.getPixelDistance);
 
             field = new Field(car.getPixelDistance);
 
@@ -30,6 +34,8 @@ namespace NewCar.Screens.Gameplay
             nextables.Add(car);
             drawables.Add(botCar);
             nextables.Add(botCar);
+            drawables.Add(botCar2);
+            nextables.Add(botCar2);
         }
 
         private void Start()

@@ -19,7 +19,7 @@ namespace NewCar.Screens.Gameplay
         protected List<Nextable> nextables;
         protected List<Drawable> drawables;
 
-        protected BaseDrawCar(string fileName, int power, int maxRpm)
+        protected BaseDrawCar(string fileName, CarSpecifications carSpecifications)
         {
             nextables = new List<Nextable>();
             drawables = new List<Drawable>();
@@ -29,7 +29,7 @@ namespace NewCar.Screens.Gameplay
             sprite.Scale = new Vector2f(size.X / sprite.TextureRect.Size.X, size.Y / sprite.TextureRect.Size.Y);
             drawables.Add(sprite);
 
-            car = new Car(power, maxRpm);
+            car = new Car(carSpecifications);
             nextables.Add(car);
         }
 

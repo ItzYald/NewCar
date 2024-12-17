@@ -18,6 +18,8 @@ namespace NewCar.Models
 
         Engine engine;
 
+        CarSpecifications specifications;
+
         int distance;
         float speed;
 
@@ -33,14 +35,16 @@ namespace NewCar.Models
 
         const float powerK = 400000000f;
 
-        public Car(int power, int maxRpm)
+        public Car(CarSpecifications specifications)
         {
             nextables = new List<Nextable>();
 
             distance = 0;
             speed = 0;
 
-            engine = new Engine(new EngineSpecifications(power, maxRpm), getTransmission);
+            this.specifications = specifications;
+
+            engine = new Engine(this.specifications.engineSpecifications, getTransmission);
 
             numbersOfTransmission = [3.8f, 2.2f, 1.3f, 0.9f, 0.5f];
             transmissionNumber = 0;
@@ -53,7 +57,6 @@ namespace NewCar.Models
         public int getRpm() => engine.rpm;
         public int getTransmissionNumber() => transmissionNumber + 1;
         public float getTransmission() => numbersOfTransmission[transmissionNumber];
-
         public void Start()
         {
             speed = 0;
@@ -89,11 +92,11 @@ namespace NewCar.Models
             }
         }
 
-        public void Break()
+        public void Brack()
         {
             if (speed > 0)
             {
-                engine.rpm -= (int)(60 * numbersOfTransmission[transmissionNumber]);
+                engine.rpm -= (int)(specifications.BrackPower * numbersOfTransmission[transmissionNumber]);
             }
         }
         public void Accel()

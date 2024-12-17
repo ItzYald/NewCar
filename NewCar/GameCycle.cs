@@ -12,7 +12,7 @@ namespace NewCar
     internal class GameCycle
     {
         static VideoMode videoMode = new VideoMode(Constants.windowWidth, Constants.windowHeight);
-        static RenderWindow window = new RenderWindow(videoMode, "Window");
+        public static RenderWindow window = new RenderWindow(videoMode, "Window");
 
         Frame frame;
 

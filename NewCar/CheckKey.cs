@@ -20,7 +20,6 @@ namespace NewCar
             this.action = action;
         }
 
-
         public void Next()
         {
             if (Keyboard.IsKeyPressed(key))

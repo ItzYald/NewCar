@@ -13,8 +13,8 @@ namespace NewCar.Screens.Gameplay
     {
         Func<int> getMainCarPixelDistance;
 
-        public BotCar(string fileName, int power, int maxRpm, Func<int> getMainCarPixelDistance) :
-            base(fileName, power, maxRpm)
+        public BotCar(string fileName, CarSpecifications carSpecifications, Func<int> getMainCarPixelDistance) :
+            base(fileName, carSpecifications)
         {
             this.getMainCarPixelDistance = getMainCarPixelDistance;
 

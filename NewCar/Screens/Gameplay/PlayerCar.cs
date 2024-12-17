@@ -12,8 +12,8 @@ namespace NewCar.Screens.Gameplay
     {
         Speedometer speedometer;
 
-        public PlayerCar(string fileName, int power, int maxRpm) :
-            base(fileName, power, maxRpm)
+        public PlayerCar(string fileName, CarSpecifications carSpecifications) :
+            base(fileName, carSpecifications)
         {
             sprite.Position = new Vector2f(120, 130);
 
@@ -38,7 +38,7 @@ namespace NewCar.Screens.Gameplay
             }
             if (Keyboard.IsKeyPressed(Keyboard.Key.S))
             {
-                car.Break();
+                car.Brack();
             }
         }
 
