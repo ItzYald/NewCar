@@ -17,7 +17,7 @@ namespace NewCar.Screens.Gameplay
         {
             sprite.Position = new Vector2f(120, 130);
 
-            speedometer = new Speedometer(car.getSpeed, car.getRpm, car.getTransmissionNumber);
+            speedometer = new Speedometer(car.getSpeed, car.getRpm, car.getTransmissionNumber, getRealDistance);
             drawables.Add(speedometer);
             nextables.Add(speedometer);
 

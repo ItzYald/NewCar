@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using NewCar.Buttons;
+using SFML.Graphics;
 using SFML.System;
 
 namespace NewCar
@@ -13,5 +14,8 @@ namespace NewCar
         public const string car1FileName = "Images/Cars/Car1.png";
 
         public static Font font = new Font("Fonts/arial.ttf");
+        
+        public static ButtonColors baseButtonColors = new ButtonColors(new Color(0, 100, 0), new Color(0, 200, 0), 2);
+
     }
 }

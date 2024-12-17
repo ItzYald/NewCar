@@ -34,6 +34,7 @@ namespace NewCar.Screens.Gameplay
         }
 
         public int getPixelDistance() => (int)(car.getDistance() / 60f * 23f);
+        public int getRealDistance() => (int)(car.getDistance() * 0.0046296f);
         public void Start() { car.Start(); }
         public void Stop() { car.Stop(); }
 

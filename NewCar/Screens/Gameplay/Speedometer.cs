@@ -16,17 +16,19 @@ namespace NewCar.Screens.Gameplay
         Func<int> getSpeed;
         Func<int> getRpm;
         Func<int> getTransmissionNumber;
+        Func<int> getDistance;
 
         Text speedText;
         Text rpmText;
         Text transmissionText;
+        Text distanceText;
 
         RectangleShape speedRect;
         RectangleShape rpmRect;
 
         List<Drawable> drawables;
 
-        public Speedometer(Func<int> getSpeed, Func<int> getRpm, Func<int> getTransmissionNumber)
+        public Speedometer(Func<int> getSpeed, Func<int> getRpm, Func<int> getTransmissionNumber, Func<int> getDistance)
         {
             drawables = new List<Drawable>();
 
@@ -41,6 +43,9 @@ namespace NewCar.Screens.Gameplay
             transmissionText = new Text(getTransmissionNumber().ToString(), Constants.font, 25);
             transmissionText.Position = new Vector2f(600, position.Y + 50);
             transmissionText.FillColor = new Color(250, 250, 10);
+            distanceText = new Text(getDistance().ToString(), Constants.font, 25);
+            distanceText.Position = new Vector2f(10, 10);
+            distanceText.FillColor = new Color(250, 250, 10);
 
             speedRect = new RectangleShape(new Vector2f(10, 100));
             speedRect.FillColor = new Color(250, 250, 10);
@@ -50,16 +55,17 @@ namespace NewCar.Screens.Gameplay
             rpmRect.FillColor = new Color(250, 250, 10);
             rpmRect.Position = new Vector2f(520, position.Y);
 
-
             drawables.Add(speedText);
-            drawables.Add(rpmText);
             drawables.Add(speedRect);
+            drawables.Add(rpmText);
             drawables.Add(rpmRect);
             drawables.Add(transmissionText);
+            drawables.Add(distanceText);
 
             this.getSpeed = getSpeed;
             this.getRpm = getRpm;
             this.getTransmissionNumber = getTransmissionNumber;
+            this.getDistance = getDistance;
         }
 
         public void Next()
@@ -67,6 +73,7 @@ namespace NewCar.Screens.Gameplay
             speedText.DisplayedString = getSpeed().ToString();
             rpmText.DisplayedString = getRpm().ToString();
             transmissionText.DisplayedString = getTransmissionNumber().ToString();
+            distanceText.DisplayedString = getDistance().ToString();
             speedRect.Rotation = getSpeed() / 1.2f + 80;
             rpmRect.Rotation = getRpm() / 40f + 80;
         }

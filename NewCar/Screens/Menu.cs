@@ -15,8 +15,7 @@ namespace NewCar.Screens
 
             buttons.Add(new RectangleButton(
                 new Vector2f(Constants.windowWidth / 2 - 60, 250),
-                new Vector2f(120, 60), new Color(230, 230, 30),
-                message:"Играть"
+                new Vector2f(120, 60), "Играть"
                 )
             {
                 onClick = () => { this.setNextScreen(ScreensEnum.gameplay); }
